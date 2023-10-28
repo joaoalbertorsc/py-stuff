@@ -7,22 +7,24 @@
 # posi¸c˜ao j).
 
 def max_subarray_soma(arr):
-    max_atual = max_global = arr[0]
-    inicio_atual = inicio_global = fim_global = 0
+    if not arr:
+        return "Soma = 0"
+    else:
+        max_atual = max_global = arr[0]
+        inicio_atual = inicio_global = fim_global = 0
+        for i in range(1, len(arr)):
+            if arr[i] > max_atual + arr[i]:
+                max_atual = arr[i]
+                inicio_atual = i
+            else:
+                max_atual += arr[i]
 
-    for i in range(1, len(arr)):
-        if arr[i] > max_atual + arr[i]:
-            max_atual = arr[i]
-            inicio_atual = i
-        else:
-            max_atual += arr[i]
+            if max_atual > max_global:
+                max_global = max_atual
+                inicio_global = inicio_atual
+                fim_global = i
 
-        if max_atual > max_global:
-            max_global = max_atual
-            inicio_global = inicio_atual
-            fim_global = i
-
-    return max_global, arr[inicio_global:fim_global+1]
+        return max_global, arr[inicio_global:fim_global+1]
 
 # Testando o algoritmo com o exemplo fornecido
 S = [5, 15, -30, 10, -5, 40, 10]
